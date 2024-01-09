@@ -39,8 +39,7 @@ module.exports = {
             const userData = await User.findOneAndDelete({ _id: req.params.userId });
 
             if (!userData) { return res.status(404).json({ message: 'No user found with this id!' }); }
-            // BONUS: Remove a user's associated thoughts when deleted.
-            // Thought.deleteMany({ _id: { $in: User.thoughts }});
+            await Thought.deleteMany({ _id: { $in: userData.thoughts }});
             res.json({ message: 'User successfully deleted!' });
         } catch (err) { res.status(500).json(err); }
     },
