@@ -1,4 +1,5 @@
 const { Schema, model, Types } =  require('mongoose');
+const { dateFormat } = require('../utils/helpers');
 
 //reactions field subdocument schema
 const reactionSchema = new Schema(
@@ -20,7 +21,7 @@ const reactionSchema = new Schema(
             type: Date,
             default: Date.now,
             //Use a getter method to format the timestamp on query
-            // get: timestamp => dateFormat(timestamp)
+            get: timestamp => dateFormat(timestamp)
         }
     }, {
         toJSON: {
@@ -42,7 +43,7 @@ const thoughtSchema = new Schema(
             type: Date,
             default: Date.now,
             //Use a getter method to format the timestamp on query
-            // get: timestamp => dateFormat(timestamp)
+            get: timestamp => dateFormat(timestamp)
         },
         username: {
             type: String,
